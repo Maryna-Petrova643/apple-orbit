@@ -95,14 +95,6 @@ const metrics = [
   ["Trust guardrails", "Edit rate, rejected plans, and wrong-action reports."],
 ];
 
-const qa = [
-  ["Why Vercel?", "It's built by the Next.js team, so deployment is zero-config. Every push to GitHub redeploys automatically and I can roll back instantly. For a prototype, speed of iteration matters most."],
-  ["How does the agent routing work?", "Each agent has keywords; the request is scored against them and the best match wins. It's a deliberate MVP choice. Next is an LLM classifier, evaluated on labelled requests before it replaces the keyword logic."],
-  ["What would you change for production?", "Server-side LLM routing and planning, real integrations with per-agent permissions, user accounts, analytics, and an eval suite that blocks releases if routing accuracy drops."],
-  ["How would you prioritise agents for launch?", "Start with high-frequency, low-risk agents like tasks, travel planning, and meal planning, which run on on-device data and don't depend on local partners in each market."],
-  ["What was the hardest part?", "Environment setup on Windows. I fixed each error by reading the message, finding the cause, and applying the smallest fix, and I documented them on this page."],
-];
-
 function Table({ head, rows }: { head: string[]; rows: string[][] }) {
   return (
     <div className={s.tableWrap}>
@@ -127,7 +119,7 @@ export default function ProcedurePage() {
         </div>
 
         <ul className={s.toc}>
-          {[["summary", "Summary"], ["screens", "Screens"], ["stack", "Stack"], ["structure", "Structure"], ["procedure", "Procedure"], ["problems", "Problems solved"], ["decisions", "Decisions"], ["metrics", "Metrics"], ["qa", "Q&A"]].map(([id, label]) => (
+          {[["summary", "Summary"], ["screens", "Screens"], ["stack", "Stack"], ["structure", "Structure"], ["procedure", "Procedure"], ["problems", "Problems solved"], ["decisions", "Decisions"], ["metrics", "Metrics"]].map(([id, label]) => (
             <li key={id}><a href={`#${id}`}>{label}</a></li>
           ))}
         </ul>
@@ -201,11 +193,6 @@ export default function ProcedurePage() {
         <section id="metrics" className={s.section}>
           <h2 className={s.h2}>How I would measure success</h2>
           <div className={s.grid2}>{metrics.map(([t, d]) => <div key={t} className={s.tile}><h4>{t}</h4><p>{d}</p></div>)}</div>
-        </section>
-
-        <section id="qa" className={s.section}>
-          <h2 className={s.h2}>Likely interview questions</h2>
-          {qa.map(([q, a]) => <div key={q} className={s.qa}><h4>{q}</h4><p>{a}</p></div>)}
         </section>
 
         <p className={s.footer}>Maryna Petrova · September 2026 · Concept prototype, not affiliated with Apple Inc.</p>
