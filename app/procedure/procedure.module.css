@@ -21,6 +21,13 @@
 @media (max-width: 760px) { .demo { grid-template-columns: 1fr; } .frameWrap { justify-self: center; } }
 .frameWrap { width: 300px; height: 620px; border-radius: 44px; border: 9px solid #1D1D1F; overflow: hidden; background: var(--bg); box-shadow: 0 24px 50px rgba(0,0,0,.18); }
 .frame { width: 100%; height: 100%; border: 0; display: block; }
+.gallery { display: grid; grid-template-columns: repeat(4, 197px); justify-content: space-between; gap: 16px 12px; margin: 0 0 24px; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, 197px); justify-content: center; } }
+.shot { margin: 0; text-align: center; }
+.shot figcaption { margin-top: 10px; font-size: 15px; font-weight: 600; color: var(--secondary); }
+.shotFrame { position: relative; width: 197px; height: 412px; border: 6px solid #1D1D1F; border-radius: 30px; overflow: hidden; background: var(--bg); box-shadow: 0 12px 28px rgba(0,0,0,.14); }
+.shotFrame iframe { position: absolute; top: 0; left: 0; width: 393px; height: 852px; border: 0; transform: scale(.4707); transform-origin: top left; }
+@media (max-width: 460px) { .gallery { grid-template-columns: repeat(2, 161px); } .shotFrame { width: 161px; height: 336px; border-radius: 26px; } .shotFrame iframe { transform: scale(.38); } }
 .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
 .tile { background: var(--cell); border-radius: 20px; padding: 18px; }
 .tile h4 { margin: 0 0 6px; font-size: 17px; }
