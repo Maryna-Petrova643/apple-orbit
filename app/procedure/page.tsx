@@ -182,7 +182,6 @@ export default function ProcedurePage() {
         <section id="problems" className={s.section}>
           <h2 className={s.h2}>Problems I hit and how I solved them</h2>
           <Table head={["Problem", "Cause", "Fix"]} rows={problems} />
-          <div className={s.quote}><b>Interview angle: </b>Debugging environment issues is part of shipping. I read the error, found the cause, fixed it, and documented it so the next person doesn&apos;t lose time.</div>
         </section>
 
         <section id="decisions" className={s.section}>
