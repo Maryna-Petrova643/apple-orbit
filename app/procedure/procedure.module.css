@@ -1,0 +1,48 @@
+/* Procedure page — Apple documentation style, reusing the app's color tokens from globals.css */
+.page { min-height: 100vh; background: var(--bg); color: var(--label); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 56px 24px 96px; }
+.eyebrow { color: var(--blue); font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 10px; }
+.title { font-size: clamp(36px, 7vw, 56px); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; margin: 0 0 14px; }
+.lede { font-size: clamp(19px, 2.6vw, 23px); color: var(--secondary); line-height: 1.4; margin: 0 0 28px; max-width: 640px; }
+.links { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; font-size: 16px; font-weight: 600; text-decoration: none; }
+.primary { background: var(--blue); color: #fff; }
+.ghost { background: var(--fill); color: var(--label); }
+.toc { display: flex; gap: 8px; flex-wrap: wrap; margin: 40px 0 8px; padding: 0; list-style: none; }
+.toc a { display: inline-block; padding: 7px 14px; border-radius: 999px; background: var(--cell); color: var(--label); font-size: 14px; font-weight: 600; text-decoration: none; }
+.section { margin-top: 56px; scroll-margin-top: 24px; }
+.h2 { font-size: 30px; font-weight: 700; letter-spacing: -.01em; margin: 0 0 16px; }
+.h3 { font-size: 20px; font-weight: 700; margin: 28px 0 10px; }
+.p { font-size: 17px; line-height: 1.55; margin: 0 0 14px; }
+.card { background: var(--cell); border-radius: 22px; padding: 22px; }
+.quote { background: var(--cell); border-left: 4px solid var(--blue); border-radius: 14px; padding: 16px 18px; font-size: 17px; line-height: 1.5; margin: 18px 0; }
+.quote b { color: var(--blue); }
+.demo { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: center; }
+@media (max-width: 760px) { .demo { grid-template-columns: 1fr; } .frameWrap { justify-self: center; } }
+.frameWrap { width: 300px; height: 620px; border-radius: 44px; border: 9px solid #1D1D1F; overflow: hidden; background: var(--bg); box-shadow: 0 24px 50px rgba(0,0,0,.18); }
+.frame { width: 100%; height: 100%; border: 0; display: block; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.tile { background: var(--cell); border-radius: 20px; padding: 18px; }
+.tile h4 { margin: 0 0 6px; font-size: 17px; }
+.tile p { margin: 0; color: var(--secondary); font-size: 15px; line-height: 1.45; }
+.tag { display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 700; color: var(--blue); }
+.tableWrap { overflow-x: auto; background: var(--cell); border-radius: 20px; }
+.table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+.table th { text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--secondary); padding: 14px 16px 10px; }
+.table td { padding: 12px 16px; border-top: .5px solid var(--separator); vertical-align: top; line-height: 1.45; }
+.table td:first-child { font-weight: 600; }
+.phase { background: var(--cell); border-radius: 22px; padding: 22px 22px 10px; margin-bottom: 16px; }
+.phaseHead { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.num { width: 34px; height: 34px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-weight: 700; flex: 0 0 auto; }
+.phaseHead h3 { margin: 0; font-size: 20px; }
+.steps { margin: 0 0 12px; padding-left: 22px; }
+.steps li { font-size: 16px; line-height: 1.5; margin-bottom: 6px; }
+.pre { background: #1D1D1F; color: #F5F5F7; border-radius: 14px; padding: 14px 16px; margin: 4px 0 14px; overflow-x: auto; font: 14px/1.6 ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+.code { font: 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; background: var(--fill); padding: 1px 6px; border-radius: 6px; }
+.qa { background: var(--cell); border-radius: 20px; padding: 18px 20px; margin-bottom: 12px; }
+.qa h4 { margin: 0 0 6px; font-size: 17px; }
+.qa p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--secondary); }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 4px; }
+.flow span { background: var(--cell); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 600; }
+.flow i { color: var(--secondary); font-style: normal; }
+.footer { margin-top: 64px; padding-top: 20px; border-top: .5px solid var(--separator); color: var(--secondary); font-size: 13px; }
