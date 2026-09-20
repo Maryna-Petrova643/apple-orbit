@@ -72,7 +72,17 @@ export default function AgentsApp() {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(list)); } catch {}
   };
   const allAgents = useMemo(() => [...myAgents, ...AGENTS], [myAgents]);
-  const openCapture = (agent: Agent | null = null) => { setCaptureAgent(agent); setDetail(null); setCaptureOpen(true); };
+  const [demoRequest, setDemoRequest] = useState<string | null>(null);
+  const [buildDemo, setBuildDemo] = useState(false);
+  const openCapture = (agent: Agent | null = null) => { setDemoRequest(null); setCaptureAgent(agent); setDetail(null); setCaptureOpen(true); };
+
+  // Deep links for the procedure page previews: /?screen=library | capture | build
+  useEffect(() => {
+    const screen = new URLSearchParams(window.location.search).get("screen");
+    if (screen === "library") setTab("library");
+    if (screen === "build") { setTab("build"); setBuildDemo(true); }
+    if (screen === "capture") { setDemoRequest("Plan a weekend in Chicago"); setCaptureOpen(true); }
+  }, []);
 
   return (
     <div className="stage">
@@ -83,7 +93,7 @@ export default function AgentsApp() {
           {tab === "home" && <HomeScreen onCapture={() => openCapture()} onOpen={setDetail} onBrowse={() => setTab("library")} />}
           {tab === "library" && <LibraryScreen mine={myAgents} only={null} onOpen={setDetail} onBuild={() => setTab("build")} />}
           {tab === "mine" && <LibraryScreen mine={myAgents} only="mine" onOpen={setDetail} onBuild={() => setTab("build")} />}
-          {tab === "build" && <BuildScreen onCreate={(a) => { saveMine([a, ...myAgents]); setTab("mine"); setDetail(a); }} />}
+          {tab === "build" && <BuildScreen demo={buildDemo} onCreate={(a) => { saveMine([a, ...myAgents]); setTab("mine"); setDetail(a); }} />}
         </main>
 
         <nav className="dock" aria-label="Main">
@@ -103,7 +113,7 @@ export default function AgentsApp() {
         )}
         {captureOpen && (
           <Sheet onClose={() => setCaptureOpen(false)} title="Apple Orbit AI Agent" tall>
-            <Capture agents={allAgents} fixedAgent={captureAgent} />
+            <Capture agents={allAgents} fixedAgent={captureAgent} initialRequest={demoRequest} />
           </Sheet>
         )}
       </div>
@@ -256,11 +266,11 @@ function AgentDetail({ agent, onTry }: { agent: Agent; onTry: () => void }) {
 
 type SpeechRec = { start: () => void; stop: () => void; onresult: ((e: any) => void) | null; onend: (() => void) | null; onerror: ((e: any) => void) | null; interimResults: boolean; lang: string; continuous: boolean };
 
-function Capture({ agents, fixedAgent }: { agents: Agent[]; fixedAgent: Agent | null }) {
+function Capture({ agents, fixedAgent, initialRequest = null }: { agents: Agent[]; fixedAgent: Agent | null; initialRequest?: string | null }) {
   const [mode, setMode] = useState<"voice" | "type">("voice");
   const [listening, setListening] = useState(false);
   const [text, setText] = useState("");
-  const [result, setResult] = useState<Result | null>(null);
+  const [result, setResult] = useState<Result | null>(initialRequest ? { agent: routeRequest(initialRequest, agents), request: initialRequest } : null);
   const [approved, setApproved] = useState(false);
   const recRef = useRef<SpeechRec | null>(null);
   const demoRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -384,9 +394,9 @@ function Switch({ on, onChange, label }: { on: boolean; onChange: (v: boolean) =
   return <button role="switch" aria-checked={on} aria-label={label} className={`switch ${on ? "is-on" : ""}`} onClick={() => onChange(!on)}><span /></button>;
 }
 
-function BuildScreen({ onCreate }: { onCreate: (a: Agent) => void }) {
-  const [name, setName] = useState("");
-  const [icon, setIcon] = useState("sparkles");
+function BuildScreen({ onCreate, demo = false }: { onCreate: (a: Agent) => void; demo?: boolean }) {
+  const [name, setName] = useState(demo ? "Plant Care" : "");
+  const [icon, setIcon] = useState(demo ? "leaf" : "sparkles");
   const [does, setDoes] = useState("");
   const [audience, setAudience] = useState<CategoryId>("everyone");
   const [perms, setPerms] = useState<string[]>(["Reminders"]);
