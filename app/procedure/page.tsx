@@ -15,6 +15,13 @@ const screens = [
   ["Build", "Create a custom agent: name, icon, job, audience, permissions, tone, and an “Ask before acting” switch.", "Requirement: build your own agent"],
 ];
 
+const shots = [
+  ["home", "1. Home"],
+  ["library", "2. Library"],
+  ["capture", "3. Capture → plan"],
+  ["build", "4. Build an agent"],
+];
+
 const stack = [
   ["Framework", "Next.js + React", "Industry standard; first-class Vercel support; easy to add server-side AI calls later."],
   ["Language", "TypeScript", "Catches mistakes early and makes the agent data structure explicit."],
@@ -139,6 +146,14 @@ export default function ProcedurePage() {
 
         <section id="screens" className={s.section}>
           <h2 className={s.h2}>What the prototype does</h2>
+          <div className={s.gallery}>
+            {shots.map(([q, cap]) => (
+              <figure key={q} className={s.shot}>
+                <div className={s.shotFrame}><iframe src={`/?screen=${q}`} title={cap} loading="lazy" /></div>
+                <figcaption>{cap}</figcaption>
+              </figure>
+            ))}
+          </div>
           <div className={s.grid2}>
             {screens.map(([t, d, r]) => <div key={t} className={s.tile}><h4>{t}</h4><p>{d}</p><span className={s.tag}>{r}</span></div>)}
           </div>
